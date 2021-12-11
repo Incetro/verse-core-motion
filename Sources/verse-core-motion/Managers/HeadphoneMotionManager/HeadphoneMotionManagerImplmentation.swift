@@ -20,6 +20,11 @@ public final class HeadphoneMotionManagerImplmentation {
     /// Motion update subscribers
     private var deviceMotionUpdatesSubscribers: [AnyHashable: Effect<DeviceMotion, Error>.Subscriber] = [:]
 
+    // MARK: - Initializers
+
+    public init() {
+    }
+
     // MARK: - Private
 
     /// Obtain CMHeadphoneMotionManager instance by the given id

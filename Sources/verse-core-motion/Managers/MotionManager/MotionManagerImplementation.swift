@@ -10,7 +10,7 @@ import Foundation
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS 2.0, *)
-final class MotionManagerImplementation {
+public final class MotionManagerImplementation {
 
     // MARK: - Properties
 
@@ -28,6 +28,11 @@ final class MotionManagerImplementation {
 
     /// Magnetometer subscribers
     private var deviceMagnetometerUpdatesSubscribers: [AnyHashable: Effect<MagnetometerData, Error>.Subscriber] = [:]
+
+    // MARK: - Initializers
+
+    public init() {
+    }
 
     // MARK: - Private
 
@@ -65,39 +70,39 @@ final class MotionManagerImplementation {
 @available(watchOS 2.0, *)
 extension MotionManagerImplementation: MotionManager {
 
-    func isAccelerometerActive(id: AnyHashable) -> Bool {
+    public func isAccelerometerActive(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isAccelerometerActive ?? false
     }
 
-    func isAccelerometerAvailable(id: AnyHashable) -> Bool {
+    public func isAccelerometerAvailable(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isAccelerometerAvailable ?? false
     }
 
-    func isDeviceMotionActive(id: AnyHashable) -> Bool {
+    public func isDeviceMotionActive(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isDeviceMotionActive ?? false
     }
 
-    func isDeviceMotionAvailable(id: AnyHashable) -> Bool {
+    public func isDeviceMotionAvailable(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isDeviceMotionAvailable ?? false
     }
 
-    func isGyroActive(id: AnyHashable) -> Bool {
+    public func isGyroActive(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isGyroActive ?? false
     }
 
-    func isGyroAvailable(id: AnyHashable) -> Bool {
+    public func isGyroAvailable(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isGyroAvailable ?? false
     }
 
-    func isMagnetometerActive(id: AnyHashable) -> Bool {
+    public func isMagnetometerActive(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isDeviceMotionActive ?? false
     }
 
-    func isMagnetometerAvailable(id: AnyHashable) -> Bool {
+    public func isMagnetometerAvailable(id: AnyHashable) -> Bool {
         requireMotionManager(id: id)?.isMagnetometerAvailable ?? false
     }
 
-    func create(id: AnyHashable) -> Effect<Never, Never> {
+    public func create(id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             guard let self = self else { return }
             if self.managers[id] != nil {
@@ -116,31 +121,31 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func destroy(id: AnyHashable) -> Effect<Never, Never> {
+    public func destroy(id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in self?.managers[id] = nil }
     }
 
-    func deviceMotion(id: AnyHashable) -> DeviceMotion? {
+    public func deviceMotion(id: AnyHashable) -> DeviceMotion? {
         requireMotionManager(id: id)?.deviceMotion.map(DeviceMotion.init)
     }
 
-    func gyroData(id: AnyHashable) -> GyroData? {
+    public func gyroData(id: AnyHashable) -> GyroData? {
         requireMotionManager(id: id)?.gyroData.map(GyroData.init)
     }
 
-    func accelerometerData(id: AnyHashable) -> AccelerometerData? {
+    public func accelerometerData(id: AnyHashable) -> AccelerometerData? {
         requireMotionManager(id: id)?.accelerometerData.map(AccelerometerData.init)
     }
 
-    func attitudeReferenceFrame(id: AnyHashable) -> CMAttitudeReferenceFrame {
+    public func attitudeReferenceFrame(id: AnyHashable) -> CMAttitudeReferenceFrame {
         requireMotionManager(id: id)?.attitudeReferenceFrame ?? .init()
     }
 
-    func magnetometerData(id: AnyHashable) -> MagnetometerData? {
+    public func magnetometerData(id: AnyHashable) -> MagnetometerData? {
         requireMotionManager(id: id)?.magnetometerData.map(MagnetometerData.init)
     }
 
-    func setAccelerometerUpdateInterval(_ accelerometerUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
+    public func setAccelerometerUpdateInterval(_ accelerometerUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             self?.requireMotionManager(id: id).map { manager in
                 manager.accelerometerUpdateInterval = accelerometerUpdateInterval
@@ -148,7 +153,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func setDeviceMotionUpdateInterval(_ deviceMotionUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
+    public func setDeviceMotionUpdateInterval(_ deviceMotionUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             self?.requireMotionManager(id: id).map { manager in
                 manager.deviceMotionUpdateInterval = deviceMotionUpdateInterval
@@ -156,7 +161,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func setGyroUpdateInterval(_ gyroUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
+    public func setGyroUpdateInterval(_ gyroUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             self?.requireMotionManager(id: id).map { manager in
                 manager.gyroUpdateInterval = gyroUpdateInterval
@@ -164,7 +169,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func setMagnetometerUpdateInterval(_ magnetometerUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
+    public func setMagnetometerUpdateInterval(_ magnetometerUpdateInterval: TimeInterval, id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             self?.requireMotionManager(id: id).map { manager in
                 manager.magnetometerUpdateInterval = magnetometerUpdateInterval
@@ -172,7 +177,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func setShowsDeviceMovementDisplay(_ showsDeviceMovementDisplay: Bool, id: AnyHashable) -> Effect<Never, Never> {
+    public func setShowsDeviceMovementDisplay(_ showsDeviceMovementDisplay: Bool, id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             self?.requireMotionManager(id: id).map { manager in
                 manager.showsDeviceMovementDisplay = showsDeviceMovementDisplay
@@ -180,7 +185,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func startAccelerometerUpdates(id: AnyHashable, to queue: OperationQueue) -> Effect<AccelerometerData, Error> {
+    public func startAccelerometerUpdates(id: AnyHashable, to queue: OperationQueue) -> Effect<AccelerometerData, Error> {
         .run { [weak self] subscriber in
 
             guard let self = self else { return AnyCancellable {} }
@@ -201,7 +206,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func startDeviceMotionUpdates(
+    public func startDeviceMotionUpdates(
         id: AnyHashable,
         using referenceFrame: CMAttitudeReferenceFrame,
         to queue: OperationQueue
@@ -226,7 +231,28 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func startGyroUpdates(id: AnyHashable, to queue: OperationQueue) -> Effect<GyroData, Error> {
+    public func startDeviceMotionUpdates(id: AnyHashable, to queue: OperationQueue) -> Effect<DeviceMotion, Error> {
+        .run { [weak self] subscriber in
+
+            guard let self = self else { return AnyCancellable {} }
+            guard let manager = self.requireMotionManager(id: id) else { return AnyCancellable {} }
+            guard self.deviceMotionUpdatesSubscribers[id] == nil else { return AnyCancellable {} }
+
+            self.deviceMotionUpdatesSubscribers[id] = subscriber
+            manager.startDeviceMotionUpdates(to: queue) { data, error in
+                if let data = data {
+                    subscriber.send(.init(data))
+                } else if let error = error {
+                    subscriber.send(completion: .failure(error))
+                }
+            }
+            return AnyCancellable {
+                manager.stopDeviceMotionUpdates()
+            }
+        }
+    }
+
+    public func startGyroUpdates(id: AnyHashable, to queue: OperationQueue) -> Effect<GyroData, Error> {
         .run { [weak self] subscriber in
 
             guard let self = self else { return AnyCancellable {} }
@@ -247,7 +273,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func startMagnetometerUpdates(id: AnyHashable, to queue: OperationQueue) -> Effect<MagnetometerData, Error> {
+    public func startMagnetometerUpdates(id: AnyHashable, to queue: OperationQueue) -> Effect<MagnetometerData, Error> {
         .run { [weak self] subscriber in
 
             guard let self = self else { return AnyCancellable {} }
@@ -271,7 +297,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func stopAccelerometerUpdates(id: AnyHashable) -> Effect<Never, Never> {
+    public func stopAccelerometerUpdates(id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             guard let self = self else { return }
             guard let manager = self.managers[id] else {
@@ -284,7 +310,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func stopDeviceMotionUpdates(id: AnyHashable) -> Effect<Never, Never> {
+    public func stopDeviceMotionUpdates(id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             guard let self = self else { return }
             guard let manager = self.managers[id] else {
@@ -297,7 +323,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func stopGyroUpdates(id: AnyHashable) -> Effect<Never, Never> {
+    public func stopGyroUpdates(id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             guard let self = self else { return }
             guard let manager = self.managers[id] else {
@@ -310,7 +336,7 @@ extension MotionManagerImplementation: MotionManager {
         }
     }
 
-    func stopMagnetometerUpdates(id: AnyHashable) -> Effect<Never, Never> {
+    public func stopMagnetometerUpdates(id: AnyHashable) -> Effect<Never, Never> {
         .fireAndForget { [weak self] in
             guard let self = self else { return }
             guard let manager = self.managers[id] else {

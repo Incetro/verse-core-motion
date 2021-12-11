@@ -95,6 +95,15 @@ public protocol MotionManager {
         to queue: OperationQueue
     ) -> Effect<DeviceMotion, Error>
 
+    /// Starts device-motion updates without a block handler.
+    ///
+    /// Returns a long-living effect that emits device motion data each time the motion manager
+    /// receives a new value.
+    func startDeviceMotionUpdates(
+        id: AnyHashable,
+        to queue: OperationQueue
+    ) -> Effect<DeviceMotion, Error>
+
     /// Starts gyroscope updates without a handler.
     ///
     /// Returns a long-living effect that emits gyro data each time the motion manager receives a
@@ -141,6 +150,14 @@ public extension MotionManager {
     /// receives a new value.
     func startDeviceMotionUpdates(id: AnyHashable, using referenceFrame: CMAttitudeReferenceFrame) -> Effect<DeviceMotion, Error> {
         startDeviceMotionUpdates(id: id, using: referenceFrame, to: .main)
+    }
+
+    /// Starts device-motion updates without a block handler.
+    ///
+    /// Returns a long-living effect that emits device motion data each time the motion manager
+    /// receives a new value.
+    func startDeviceMotionUpdates(id: AnyHashable) -> Effect<DeviceMotion, Error> {
+        startDeviceMotionUpdates(id: id, to: .main)
     }
 
     /// Starts gyroscope updates without a handler.
