@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "combine-schedulers",
+        "repositoryURL": "https://github.com/Incetro/combine-schedulers",
+        "state": {
+          "branch": "master",
+          "revision": "0f4f9cd0dd69e68288f4b67f19cf5cd640a19900",
+          "version": null
+        }
+      },
+      {
+        "package": "enum-key-paths",
+        "repositoryURL": "https://github.com/Incetro/enum-key-paths",
+        "state": {
+          "branch": "master",
+          "revision": "3de6ff8c7f2b7ed9015714dc33fe285154e50bf6",
+          "version": null
+        }
+      },
+      {
+        "package": "verse",
+        "repositoryURL": "https://github.com/Incetro/verse",
+        "state": {
+          "branch": "master",
+          "revision": "e634b07a7a532d7ad4480c7713c83d4d54f508aa",
+          "version": null
+        }
+      },
+      {
+        "package": "xctest-interface-adapter",
+        "repositoryURL": "https://github.com/Incetro/xctest-interface-adapter",
+        "state": {
+          "branch": "master",
+          "revision": "415942e4609fd58027a085de8592e18e86beb23b",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
