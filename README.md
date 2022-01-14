@@ -220,3 +220,4 @@ You can add ComposableCoreMotion to an Xcode project by adding it as a package d
 ## License
 
 This library is released under the MIT license. See [LICENSE](LICENSE) for details.
+Thanks them [pointfree](https://github.com/pointfreeco/composable-core-motion) very much for their idea 🖤
